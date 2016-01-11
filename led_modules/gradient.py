@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from module_base import LedActionModule
-import random
 from math import ceil, floor
+
 
 class Gradient(LedActionModule):
     def __init__(self, length, color_start=None, color_end=None):
@@ -19,17 +19,6 @@ class Gradient(LedActionModule):
             self.color_end = color_end
         else:
             self.color_end = self.random_color()
-
-    def random_color(self, weight=(1,1,1), min=(0,0,0)):
-        '''
-        Random color with weight(0,1)
-           and minimum color (0,255)
-        '''
-        return tuple(int(min[i] +
-                         (random.random() *
-                          weight[i] *
-                          (255 - min[i])))
-                     for i in range(3))
 
     def time_step(self):
         self.color_start = self.random_color()
