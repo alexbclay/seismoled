@@ -1,20 +1,13 @@
 #!/usr/bin/env python
-'''
-import led_modules
-from pprint import pprint
-
-if __name__ == '__main__':
-    gradient = led_modules.gradient.Gradient(10)
-    print gradient.random_color(weight=(0,0.5,1),min=(128,128,255))
-'''
-
 import Tkinter as tk
 import random
 import led_modules
 
 class App(tk.Frame):
     num_leds = 24
-    module = led_modules.gradient.Gradient(num_leds)
+    #module = led_modules.gradient.Gradient(num_leds)
+    module = led_modules.binary_clock.BinaryClock(num_leds)
+
     def __init__(self, master=None, len=24):
         tk.Frame.__init__(self, master)
 
@@ -51,7 +44,7 @@ class App(tk.Frame):
             self.led_canvas.create_rectangle(6,5 + 40*i+1, 98, 40*(i+1)-1, fill='#%02x%02x%02x' % array[i])
         for i in range(self.num_leds):
             self.led_canvas.create_rectangle(5,5 + 40*i, 99, 40*(i+1),)
-        print array
+#        print array
 
     def step(self):
         self.draw_array(self.module.trigger())

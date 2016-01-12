@@ -6,11 +6,11 @@ from datetime import datetime
 class BinaryClock(LedActionModule):
     def __init__(self, length, bg_color=None, digit_color=None, separate_color=None):
         self.length = length
-        self.bg_color = bg_color or (128,128,128)
-        self.separate_color = separate_color or (10,10,255)
+        self.bg_color = bg_color or self.random_color()
+        self.separate_color = separate_color or self.random_color()
 
         self.binary_colors = [self.bg_color,
-                              digit_color or (255,10,10)]
+                              digit_color or self.random_color()]
 
     def time_step(self):
         ''' make a clock! '''
@@ -23,6 +23,7 @@ class BinaryClock(LedActionModule):
         ret.extend(self.to_binary_array(now.tm_min))
         ret.append(self.separate_color)
         ret.extend(self.to_binary_array(now.tm_sec))
+        ret.append(self.separate_color)
 
         return ret
 
